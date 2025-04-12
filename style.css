@@ -1,0 +1,185 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-family: "Tiny5", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  transition: background-color 1s ease;
+}
+
+.navbar {
+  background-color: #ffb752;
+  transition: all 1s ease;
+  transform-origin: top;
+}
+
+.squeeze-navbar {
+  transform: scaleY(0.1);
+}
+
+.squeeze-bg {
+  background-color: var(--theme-bg-color);
+  transition: background-color 1s ease;
+}
+
+.footer {
+  background-color: #ffb752;
+  font-family: "Tiny5", sans-serif;
+  padding: 1rem;
+  transition: all 1s ease;
+  transform-origin: bottom;
+}
+
+.tiny5-regular {
+  font-family: "Tiny5", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 5rem;
+  color: #f85d6d;
+  margin: 20px 0;
+}
+
+.bytesized-regular {
+  font-family: "Bytesized", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.game-container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: all 0.5s ease;
+}
+
+#menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: #ffb752;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding-bottom: 50px;
+  padding-top: 70px;
+  transition: all 1s ease;
+}
+
+.menu-item {
+  font-family: "Bytesized", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin: 15px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#settings-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: #ffb752;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  padding-top: 50px;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: all 1s ease;
+}
+
+.settings-header {
+  font-family: "Tiny5", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin: 15px 0;
+  margin-bottom: 20px;
+}
+
+.settings-option {
+  margin: 10px 0;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Bytesized", sans-serif;
+  font-size: 3rem;
+  color: #FFFFFF;
+  flex-direction: column;
+}
+
+.settings-option input[type="range"] {
+  width: 200px;
+  margin: 10px 0;
+}
+
+.settings-option select {
+  font-family: "Bytesized", sans-serif;
+  font-size: 2rem;
+  color: #411805;
+  padding: 5px;
+  margin: 10px 0;
+}
+
+.settings-back {
+  font-family: "Bytesized", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#hangman-text {
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+#play-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: #ffb752;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  padding-top: 50px;
+  z-index: 1000;
+  overflow-y: auto;
+  transition: all 1s ease;
+}
+
+.play-header {
+  font-family: "Tiny5", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin: 15px 0;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 576px) {
+  .footer {
+    padding: 0.5rem;
+  }
+}

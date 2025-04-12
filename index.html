@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hangman!</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Tiny5&family=Wavefont:wght@4..1000&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body id="body">
+  <nav class="navbar"></nav>
+  
+  <div class="game-container">
+    <h1 class="tiny5-regular" id="hangman-text">HANGMAN!</h1>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div><span class="footer-text">2025 Hangman!</span></div>
+  </footer>
+
+  <!-- Menu -->
+  <div id="menu">
+    <div class="menu-item" id="play">Play!</div>
+    <div class="menu-item" id="how-to-play">How to Play</div>
+    <div class="menu-item" id="settings">Settings</div>
+    <div class="menu-item" id="back">Back</div>
+  </div>
+
+  <!-- Settings -->
+  <div id="settings-page">
+    <div class="settings-header">Settings</div>
+    <div class="settings-option">
+      <label for="sound">Sound</label>
+      <input type="range" id="sound" name="sound" min="0" max="100" value="50">
+      <label for="theme">Theme</label>
+      <select id="theme" name="theme">
+        <option value="" disabled>Select</option>
+        <option value="Red">Red</option>
+        <option value="Yellow">Yellow</option>
+        <option value="Green">Green</option>
+        <option value="Blue">Blue</option>
+      </select>
+      <div class="settings-back" id="back-settings">Back</div>
+    </div>
+  </div>
+
+  <!-- Play -->
+  <div id="play-page">
+    <div class="play-header">Play!</div>
+  </div>
+
+ 
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  
+</body>
+</html>
