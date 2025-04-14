@@ -12,7 +12,7 @@ const playBtn = document.getElementById('play');
 const playPage = document.getElementById('play-page');
 const howToPlayBtn = document.getElementById('how-to-play');
 const bgMusic = document.getElementById('bg-music');
-const soundPrev = document.getElementById('soun-prev');
+const soundPrev = document.getElementById('sound-prev');
 const soundNext = document.getElementById('sound-next');
 const soundLabel = document.querySelector('.sound-label');
 const soundSlider = document.getElementById('sound');
@@ -116,33 +116,24 @@ backSettings.addEventListener('click', function() {
 
 // Sound
 const audioFiles = [
-  { name: "", file: "" },
-  { name: "", file: "" }
+  { name: "Intro", file: "audio/intro.mp3" }
 ];
 
 let currentTrack = 0;
-
-function audio() {
-  loadTrack(currentTrack);
-  const playAudio = bgMusic.play();
-  bgMusic.volume = soundSlider.value / 100;
-  soundSlider.addEventListener('input', function() {
-    bgMusic.volume = this.value / 100;
-  });
-}
+let audioInitialized = false;
 
 function loadTrack(index) {
   currentTrack = index;
   bgMusic.src = audioFiles[index].file;
   soundLabel.textContent = audioFiles[index].name;
-  preloadAdjacentTeacks();
+  preloadAdjacentTracks();
 }
 
 function preloadAdjacentTracks() {
   const prevIndex = (currentTrack - 1 + audioFiles.length) % audioFiles.length;
   const nextIndex = (currentTrack + 1) % audioFiles.length;
   const prevAudio = new Audio(audioFiles[prevIndex].file);
-  const nextAudio = new Audio(audioFIles[nextIndex].file);
+  const nextAudio = new Audio(audioFiles[nextIndex].file);
   prevAudio.load();
   nextAudio.load();
 }
@@ -150,14 +141,41 @@ function preloadAdjacentTracks() {
 soundPrev.addEventListener('click', () => {
   currentTrack = (currentTrack - 1 + audioFiles.length) % audioFiles.length;
   loadTrack(currentTrack);
+  if (audioInitialized) bgMusic.play();
 });
 
 soundNext.addEventListener('click', () => {
   currentTrack = (currentTrack + 1) % audioFiles.length;
   loadTrack(currentTrack);
-})
+  if (audioInitialized) bgMusic.play();
+});
 
-window.addEventListener('DOMContentLoaded', audio);
+soundSlider.addEventListener('input', () => {
+  if (audioInitialized) {
+    bgMusic.volume = soundSlider.value / 100;
+  }
+});
+
+// Auto-play attempt on load
+window.addEventListener('DOMContentLoaded', () => {
+  bgMusic.volume = 0;
+  bgMusic.muted = true;
+  loadTrack(currentTrack);
+  bgMusic.play().catch(err => {
+    console.warn("Autoplay likely blocked, waiting for user interaction.", err);
+  });
+
+  const enableSound = () => {
+    bgMusic.muted = false;
+    bgMusic.volume = soundSlider.value / 100;
+    audioInitialized = true;
+    window.removeEventListener('click', enableSound);
+    window.removeEventListener('keydown', enableSound);
+  };
+
+  window.addEventListener('click', enableSound);
+  window.addEventListener('keydown', enableSound);
+});
 
 // Game
 playBtn.addEventListener('click', function() {
