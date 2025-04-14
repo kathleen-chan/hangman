@@ -116,7 +116,8 @@ backSettings.addEventListener('click', function() {
 
 // Sound
 const audioFiles = [
-  { name: "Intro", file: "audio/intro.mp3" }
+  { name: "Intro", file: "audio/intro.mp3" }, 
+  { name: "Vibes", file: "audio/vibes.mp3" }
 ];
 
 let currentTrack = 0;
