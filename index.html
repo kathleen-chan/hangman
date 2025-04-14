@@ -41,7 +41,12 @@
   <div id="settings-page">
     <div class="settings-header">Settings</div>
     <div class="settings-option">
-      <label for="sound">Sound</label>
+      <div class="'sound-switch">
+        <span class="arrow" id="sound-prev"><</span>
+        <span class="sound-label">Sound</span>
+        <span class="arrow" id="sound-next">></span>
+      </div>
+      
       <input type="range" id="sound" name="sound" min="0" max="100" value="50">
       <label for="theme">Theme</label>
       <select id="theme" name="theme">
@@ -54,6 +59,12 @@
       <div class="settings-back" id="back-settings">Back</div>
     </div>
   </div>
+
+  <!-- Sound -->
+   <audio id="bg-music" loop autoplay>
+    <source src="" type="audio/">
+    <source src="" type="audio/">
+   </audio>
 
   <!-- Play -->
   <div id="play-page">
