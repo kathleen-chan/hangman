@@ -12,6 +12,9 @@ const playBtn = document.getElementById('play');
 const playPage = document.getElementById('play-page');
 const leaderboardBtn = document.getElementById('leaderboard');
 const leaderboardPage = document.getElementById('leaderboard-page');
+const registerPlayerBtn = document.getElementById('register-btn');
+const resgisterPage = document.getElementById('register-page');
+const backRegister = document.getElementById('back-register');
 const backLeaderboard = document.getElementById('back-leaderboard');
 const bgMusic = document.getElementById('bg-music');
 const soundPrev = document.getElementById('sound-prev');
@@ -68,6 +71,7 @@ function applyTheme(theme) {
     .menu-item:hover,
     .settings-back:hover,
     .leaderboard-back:hover,
+    .register-back:hover,
     .arrow:hover {
       color: ${complementaryColor};
       transform: scale(1.1);
@@ -121,7 +125,7 @@ backSettings.addEventListener('click', function() {
 // Sound
 const audioFiles = [
   { name: "Intro", file: "audio/intro.mp3" }, 
-  { name: "Vibes", file: "audio/vibes.mp3" }
+  { name: "Showdown!", file: "audio/vibes.mp3" }
 ];
 
 let currentTrack = 0;
@@ -183,15 +187,25 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 //Leaderboard
-leaderboard.addEventListener('click', function() {
+leaderboardBtn.addEventListener('click', function() {
   menu.style.display = 'none';
   leaderboardPage.style.display = 'flex';
   initLeaderboard();
 });
 
+registerPlayerBtn.addEventListener('click', function() {
+  leaderboardPage.style.display = 'none';
+  registerPage.style.display = 'flex';
+});
+
 backLeaderboard.addEventListener('click', function() {
   leaderboardPage.style.display = 'none';
   menu.style.display = 'flex';
+});
+
+backRegister.addEventListener('click', function() {
+  registerPage.style.display = 'none';
+  leaderboardPage.style.display = 'flex';
 });
 
 // Game

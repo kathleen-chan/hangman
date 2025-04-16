@@ -63,7 +63,7 @@ body {
   transition: all 0.5s ease;
 }
 
-#menu {
+#menu, #settings-page, #register-page, #play-page {
   position: fixed;
   top: 0;
   left: 0;
@@ -87,23 +87,6 @@ body {
   margin: 15px 0;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-#settings-page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 50px);
-  background-color: #ffb752;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  padding-top: 50px;
-  z-index: 1000;
-  overflow-y: auto;
-  transition: all 1s ease;
 }
 
 .settings-header {
@@ -224,6 +207,25 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.register-player-button {
+  font-family: "Bytesized", sans-serif;
+  font-size: 1rem;
+  color: #411805;
+  background-color: #f3efec;
+  padding: 5px 10px;
+  border: 2px solid #411805;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 20px auto;
+  width: fit-content;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.register-player-button:hover {
+  transform: scale(1.1);
+  background-color: #ffe8c6;
+}
+
 .leaderboard-back {
   font-family: "Bytesized", sans-serif;
   font-size: 3rem;
@@ -237,21 +239,25 @@ body {
   transform: scale(1.1);
 }
 
-#play-page {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 50px);
-  background-color: #ffb752;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  padding-top: 50px;
-  z-index: 1000;
-  overflow-y: auto;
-  transition: all 1s ease;
+.register-header {
+  font-family: "Tiny5", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.register-back {
+  font-family: "Bytesized", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.register-back:hover {
+  transform: scale(1.1);
 }
 
 .play-header {
