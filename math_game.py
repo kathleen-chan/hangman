@@ -1,4 +1,4 @@
-import pyscript
+from pyscript import Element, window
 import time
 import random
 
@@ -10,7 +10,7 @@ class Method:
         n2 = random.randint(1, 200)
         while True:
             try:
-                ans = int(input(f"What is {n1} + {n2}? "))
+                ans = int(Element(f"What is {n1} + {n2}? ").value)
                 if ans == n1 + n2:
                     return True
             except ValueError:
@@ -25,7 +25,7 @@ class Method:
             n1, n2 = n2, n1
         while True:
             try:
-                ans = int(input(f"What is {n1} - {n2}? "))
+                ans = int(Element(f"What is {n1} - {n2}? ").value)
                 if ans == n1 - n2:
                     return True
             except ValueError:
@@ -38,7 +38,7 @@ class Method:
         n2 = random.randint(1, 15)
         while True:
             try:
-                ans = int(input(f"What is {n1} * {n2}? "))
+                ans = int(Element(f"What is {n1} * {n2}? ").value)
                 if ans == n1 * n2:
                     return True
             except ValueError:
@@ -53,7 +53,7 @@ class Method:
             n1 += (n2 - n1 % n2)  # Ensure divisible
         while True:
             try:
-                ans = int(input(f"What is {n1} / {n2}? "))
+                ans = int(Element(f"What is {n1} / {n2}? ").value)
                 if ans == n1 // n2:
                     return True
             except ValueError:
@@ -80,7 +80,7 @@ class User:
 
     
     def __init__(self):
-        self.name = input("Enter your name: ")
+        self.name = Element("name").value
         self.score = 0
 
     def start_game(self):
@@ -96,8 +96,4 @@ class User:
             print("Your score is:", self.score, "time left:", int(duration - time.time() + start_time))
 
         print("Time's up! Your final score is:", self.score)
-
-if __name__ == "__main__":
-    user1 = User()
-    user1.start_game()
         
