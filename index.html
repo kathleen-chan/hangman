@@ -70,31 +70,51 @@
     <div id="leaderboard-page" class="leaderboard">
       <div class="leaderboard-header">Leaderboard</div>
       <div class="leaderboard-content">
-        <div class="character-selection">
-
-        </div>
         <div class="leaderboard-table">
           <div class="leaderboard-row header">
             <div>Rank</div>
+            <div>Character</div>
             <div>Player</div>
             <div>Score</div>
           </div>
         </div>
-        <div class="register-player-button" id="register-btn">Register Player</div>
+        <div class="leaderboard-btns">
+          <div class="register-player-button" id="register-btn">Register Player</div>
+          <div class="remove-player-button" id="remove-btn">Remove Player</div>
+        </div>
         <div class="leaderboard-back" id="back-leaderboard">Back</div>
       </div>
     </div>
 
   <!-- Register -->
     <div id="register-page">
-      <div class="register-header">Play!</div>
-      <div class="leaderboard-back" id="back-register">Back</div>
-
+      <div class="register-header">Register</div>
+      <div class="register-content">
+        <div class="register-switch">
+          <span class="arrow" id="register-prev"><</span>
+          <div class="character-container">
+            <img id="character-display" src="" alt="Selected Character">
+          </div>
+          <span class="arrow" id="register-next">></span>
+        </div>
+        <div class="username-input">
+          <input type="text" id="username" placeholder="username">
+        </div>
+        <button id="confirm-register" class="register-button">Confirm</button>
+        <div class="leaderboard-back" id="back-register">Back</div>
+      </div>
     </div>
-
+    
   <!-- Play -->
   <div id="play-page">
-    <div class="play-header">Play!</div>
+    <div class="play-header">Choose a Game!</div>
+    <div class="game-options">
+      <a href="games/math_game.html" class="game-option" id="play-math">
+      <img src="games/math-game-icon.png" alt="Math Game">
+      <span>Math Game</span>
+      </a>
+    <div class="settings-back" id="back-play">Back</div>
+    </div>
   </div>
 
  

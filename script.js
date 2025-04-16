@@ -8,19 +8,27 @@ const backBtn = document.getElementById('back');
 const settings = document.getElementById('settings');
 const settingsPage = document.getElementById('settings-page');
 const backSettings = document.getElementById('back-settings');
-const playBtn = document.getElementById('play');
-const playPage = document.getElementById('play-page');
-const leaderboardBtn = document.getElementById('leaderboard');
-const leaderboardPage = document.getElementById('leaderboard-page');
-const registerPlayerBtn = document.getElementById('register-btn');
-const resgisterPage = document.getElementById('register-page');
-const backRegister = document.getElementById('back-register');
-const backLeaderboard = document.getElementById('back-leaderboard');
 const bgMusic = document.getElementById('bg-music');
 const soundPrev = document.getElementById('sound-prev');
 const soundNext = document.getElementById('sound-next');
 const soundLabel = document.querySelector('.sound-label');
 const soundSlider = document.getElementById('sound');
+const leaderboardBtn = document.getElementById('leaderboard');
+const leaderboardPage = document.getElementById('leaderboard-page');
+const backLeaderboard = document.getElementById('back-leaderboard');
+const registerPlayerBtn = document.getElementById('register-btn');
+const removePlayerBtn = document.getElementById('remove-btn');
+const registerPage = document.getElementById('register-page');
+const registerPrev = document.getElementById('register-prev');
+const registerNext = document.getElementById('register-next');
+const charDisplay = document.getElementById('character-display');
+const confirmRegister = document.getElementById('confirm-register');
+const username = document.getElementById('username');
+const backRegister = document.getElementById('back-register');
+const playBtn = document.getElementById('play');
+const playPage = document.getElementById('play-page');
+const playMathBtn = document.getElementById('play-math');
+const backPlay = document.getElementById('back-play');
 
 // Theme
 const themeConfig = {
@@ -72,11 +80,12 @@ function applyTheme(theme) {
     .settings-back:hover,
     .leaderboard-back:hover,
     .register-back:hover,
+    .game-option:hover,
     .arrow:hover {
       color: ${complementaryColor};
-      transform: scale(1.1);
     }
     #sound { accent-color: ${complementaryColor}; }
+    .register-button { background-color: ${complementaryColor}; }
     #hangman-text:hover { color: ${themeSettings.hoverColor} !important; }
   `;
 }
@@ -193,23 +202,130 @@ leaderboardBtn.addEventListener('click', function() {
   initLeaderboard();
 });
 
+backLeaderboard.addEventListener('click', function() {
+  username.value = '';
+  leaderboardPage.style.display = 'none';
+  menu.style.display = 'flex';
+});
+
+//Register
 registerPlayerBtn.addEventListener('click', function() {
   leaderboardPage.style.display = 'none';
   registerPage.style.display = 'flex';
 });
 
-backLeaderboard.addEventListener('click', function() {
-  leaderboardPage.style.display = 'none';
-  menu.style.display = 'flex';
+let currentChar = 0;
+const charFiles = [
+  { name: "willy", file: "characters/willy.png" }, 
+  { name: "j lei", file: "characters/jlei.png" }
+];
+
+function loadCharacter(index) {  
+  currentChar = index;
+  charDisplay.src = charFiles[index].file;
+  charDisplay.alt = charFiles[index].name;
+}
+
+registerPrev.addEventListener('click', () => {
+  currentChar = (currentChar - 1 + charFiles.length) % charFiles.length;
+  loadCharacter(currentChar);
+});
+
+registerNext.addEventListener('click', () => {
+  currentChar = (currentChar + 1) % charFiles.length;
+  loadCharacter(currentChar);
+});
+
+loadCharacter(0);
+
+confirmRegister.addEventListener('click', function() {
+  const usernameValue = username.value.trim();
+  const playerData = {
+    username: usernameValue,
+    character: charFiles[currentChar].name,
+    characterImage: charFiles[currentChar].file,
+    score: 0,
+};
+username.value = '';
+
+//Register Player
+let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+  leaderboard.push(playerData); 
+  localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+  localStorage.setItem('currentPlayer', JSON.stringify(playerData));
+  registerPage.style.display = 'none';
+  leaderboardPage.style.display = 'flex';
+  initLeaderboard();
+});
+
+let selectedPlayer = null;
+
+function initLeaderboard() {
+  const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+  const leaderboardTable = document.querySelector('.leaderboard-table');
+  const currentTheme = document.getElementById('theme').value || 'Yellow';
+  const themeSettings = themeConfig[currentTheme];
+  
+  while (leaderboardTable.children.length > 1) {
+    leaderboardTable.removeChild(leaderboardTable.lastChild);
+  }
+  
+  leaderboard.sort((a, b) => b.score - a.score).forEach((player, index) => {
+    const row = document.createElement('div');
+    row.className = 'leaderboard-row';
+    row.innerHTML = `
+      <div>${index + 1}</div>
+      <div><img class="leaderboard-character" src="${player.characterImage}" alt="${player.character}"></div>
+      <div>${player.username}</div>
+      <div>${player.score || 0}</div>
+    `;
+
+//Remove Player
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.leaderboard-row').forEach(r => {
+        r.style.backgroundColor = '';
+        r.classList.remove('selected');
+      });
+      row.style.backgroundColor = themeSettings.hoverColor + '40';
+      row.classList.add('selected');
+      selectedPlayer = player.username;
+    });
+    leaderboardTable.appendChild(row);
+  });
+}
+
+removePlayerBtn.addEventListener('click', function() {
+  if (!selectedPlayer) {
+    alert("Please select a player by clicking on their row first");
+    return;
+  }
+  
+  if (confirm(`Are you sure you want to remove ${selectedPlayer}?`)) {
+    let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    leaderboard = leaderboard.filter(player => player.username !== selectedPlayer);
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    initLeaderboard();
+    selectedPlayer = null;
+  }
 });
 
 backRegister.addEventListener('click', function() {
+  username.value = '';
   registerPage.style.display = 'none';
   leaderboardPage.style.display = 'flex';
 });
 
-// Game
+//Game
 playBtn.addEventListener('click', function() {
   menu.style.display = 'none';
   playPage.style.display = 'flex';
+});
+
+playMathBtn.addEventListener('click', function() {
+window.location.href = 'games/math_game.html';
+});
+
+backPlay.addEventListener('click', function() {
+  playPage.style.display = 'none';
+  menu.style.display = 'flex';
 });
