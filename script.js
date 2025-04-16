@@ -10,7 +10,9 @@ const settingsPage = document.getElementById('settings-page');
 const backSettings = document.getElementById('back-settings');
 const playBtn = document.getElementById('play');
 const playPage = document.getElementById('play-page');
-const howToPlayBtn = document.getElementById('how-to-play');
+const leaderboardBtn = document.getElementById('leaderboard');
+const leaderboardPage = document.getElementById('leaderboard-page');
+const backLeaderboard = document.getElementById('back-leaderboard');
 const bgMusic = document.getElementById('bg-music');
 const soundPrev = document.getElementById('sound-prev');
 const soundNext = document.getElementById('sound-next');
@@ -49,6 +51,7 @@ function applyTheme(theme) {
   footer.style.backgroundColor = themeSettings.bgColor;
   menu.style.backgroundColor = themeSettings.bgColor;
   settingsPage.style.backgroundColor = themeSettings.bgColor;
+  leaderboardPage.style.backgroundColor = themeSettings.bgColor;
   hangmanText.style.color = themeSettings.textColor;
 
   let complementaryColor = theme === 'Red' || theme === 'Blue' ? '#ffb752' : '#f85d6d';
@@ -64,6 +67,7 @@ function applyTheme(theme) {
   hoverStyle.textContent = `
     .menu-item:hover,
     .settings-back:hover,
+    .leaderboard-back:hover,
     .arrow:hover {
       color: ${complementaryColor};
       transform: scale(1.1);
@@ -157,7 +161,7 @@ soundSlider.addEventListener('input', () => {
   }
 });
 
-// Auto-play attempt on load
+// Auto-play
 window.addEventListener('DOMContentLoaded', () => {
   bgMusic.volume = 0;
   bgMusic.muted = true;
@@ -178,13 +182,20 @@ window.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('keydown', enableSound);
 });
 
-// Game
-playBtn.addEventListener('click', function() {
-  playPage.style.display = 'none';
+//Leaderboard
+leaderboard.addEventListener('click', function() {
+  menu.style.display = 'none';
+  leaderboardPage.style.display = 'flex';
+  initLeaderboard();
+});
+
+backLeaderboard.addEventListener('click', function() {
+  leaderboardPage.style.display = 'none';
   menu.style.display = 'flex';
 });
 
-// How to Play
-howToPlayBtn.addEventListener('click', function() {
-
+// Game
+playBtn.addEventListener('click', function() {
+  menu.style.display = 'none';
+  playPage.style.display = 'flex';
 });

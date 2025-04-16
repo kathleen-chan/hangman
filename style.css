@@ -32,6 +32,7 @@ body {
 .footer {
   background-color: #ffb752;
   font-family: "Tiny5", sans-serif;
+  color:  #411805;
   padding: 1rem;
   transition: all 1s ease;
   transform-origin: bottom;
@@ -175,6 +176,65 @@ body {
 #hangman-text {
   transition: color 0.3s ease;
   cursor: pointer;
+}
+
+.leaderboard {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: #ffb752;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  padding-top: 50px;
+  z-index: 1000;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: all 1s ease;
+}
+
+.leaderboard-header {
+  font-family: "Tiny5", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.leaderboard-table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-collapse: collapse;
+}
+
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 2fr;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-row.header {
+  font-weight: bold;
+  color: #411805;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-back {
+  font-family: "Bytesized", sans-serif;
+  font-size: 3rem;
+  color: #411805;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.leaderboard-back:hover {
+  transform: scale(1.1);
 }
 
 #play-page {

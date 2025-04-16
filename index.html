@@ -32,7 +32,7 @@
   <!-- Menu -->
   <div id="menu">
     <div class="menu-item" id="play">Play!</div>
-    <div class="menu-item" id="how-to-play">How to Play</div>
+    <div class="menu-item" id="leaderboard">Leaderboard</div>
     <div class="menu-item" id="settings">Settings</div>
     <div class="menu-item" id="back">Back</div>
   </div>
@@ -41,7 +41,7 @@
   <div id="settings-page">
     <div class="settings-header">Settings</div>
     <div class="settings-option">
-      <div class="'sound-switch">
+      <div class="sound-switch">
         <span class="arrow" id="sound-prev"><</span>
         <span class="sound-label">Sound</span>
         <span class="arrow" id="sound-next">></span>
@@ -61,10 +61,28 @@
   </div>
 
   <!-- Sound -->
-   <audio id="bg-music" loop preload="auto" loop>
+   <audio id="bg-music" preload="auto" loop>
     <source src="audio/intro.mp3" type="audio/mpeg">
     <source src="audio/vibes.mp3" type="audio/mpeg">
    </audio>
+
+   <!-- Leaderboard -->
+    <div id="leaderboard-page" class="leaderboard">
+      <div class="leaderboard-header">Leaderboard</div>
+      <div class="leaderboard-content">
+        <div class="character-selection">
+
+        </div>
+        <div class="leaderboard-table">
+          <div class="leaderboard-row header">
+            <div>Rank</div>
+            <div>Player</div>
+            <div>Score</div>
+          </div>
+        </div>
+        <div class="leaderboard-back" id="back-leaderboard">Back</div>
+      </div>
+    </div>
 
   <!-- Play -->
   <div id="play-page">
