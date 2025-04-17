@@ -28,6 +28,10 @@ const backRegister = document.getElementById('back-register');
 const playBtn = document.getElementById('play');
 const playPage = document.getElementById('play-page');
 const playMathBtn = document.getElementById('play-math');
+const playClickerBtn = document.getElementById('play-clicker');
+const playFillerBtn = document.getElementById('play-filler');
+const playTypeBtn = document.getElementById('play-type');
+const playHangmanBtn = document.getElementById('play-hangman');
 const backPlay = document.getElementById('back-play');
 
 // Theme
@@ -217,7 +221,10 @@ registerPlayerBtn.addEventListener('click', function() {
 let currentChar = 0;
 const charFiles = [
   { name: "willy", file: "characters/willy.png" }, 
-  { name: "j lei", file: "characters/jlei.png" }
+  { name: "lucy", file: "characters/lucy.png"},
+  { name: "j lei", file: "characters/jlei.png" },
+  { name: "tsai", file: "characters/tsai.png"},
+  { name: "tristan", file: "characters/tristan.png"}
 ];
 
 function loadCharacter(index) {  
@@ -238,25 +245,37 @@ registerNext.addEventListener('click', () => {
 
 loadCharacter(0);
 
-confirmRegister.addEventListener('click', function() {
-  const usernameValue = username.value.trim();
+const registerForm = document.getElementById('register-form');
+function handleRegistration(e) {
+  if (e) e.preventDefault(); 
+    const usernameValue = username.value.trim();
   const playerData = {
     username: usernameValue,
     character: charFiles[currentChar].name,
     characterImage: charFiles[currentChar].file,
     score: 0,
 };
+
+if (usernameValue.length > 20) { 
+  alert("Username cannot exceed 20 characters");
+  return;
+}
 username.value = '';
 
 //Register Player
 let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-  leaderboard.push(playerData); 
+  leaderboard.push(playerData);
   localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
   localStorage.setItem('currentPlayer', JSON.stringify(playerData));
+  
+  username.value = '';
   registerPage.style.display = 'none';
   leaderboardPage.style.display = 'flex';
   initLeaderboard();
-});
+}
+
+registerForm.addEventListener('submit', handleRegistration);
+confirmRegister.addEventListener('click', handleRegistration);
 
 let selectedPlayer = null;
 
@@ -323,6 +342,22 @@ playBtn.addEventListener('click', function() {
 
 playMathBtn.addEventListener('click', function() {
 window.location.href = 'games/math_game.html';
+});
+
+playClickerBtn.addEventListener('click', function() {
+  window.location.href = 'games/clicker.html';
+});
+
+playFillerBtn.addEventListener('click', function() {
+  window.location.href = 'games/filler.html';
+});
+
+playTypeBtn.addEventListener('click', function() {
+  window.location.href = 'games/type.html';
+});
+
+playHangmanBtn.addEventListener('click', function() {
+  window.location.href = 'games/hangman.html';
 });
 
 backPlay.addEventListener('click', function() {
