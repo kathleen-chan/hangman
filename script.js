@@ -1,4 +1,4 @@
-const hangmanText = document.getElementById('hangman-text');
+const titleText = document.getElementById('title-text');
 const navbar = document.querySelector('.navbar');
 const footer = document.querySelector('.footer');
 const body = document.body;
@@ -67,7 +67,7 @@ function applyTheme(theme) {
   menu.style.backgroundColor = themeSettings.bgColor;
   settingsPage.style.backgroundColor = themeSettings.bgColor;
   leaderboardPage.style.backgroundColor = themeSettings.bgColor;
-  hangmanText.style.color = themeSettings.textColor;
+  titleText.style.color = themeSettings.textColor;
 
   let complementaryColor = theme === 'Red' || theme === 'Blue' ? '#ffb752' : '#f85d6d';
 
@@ -90,7 +90,7 @@ function applyTheme(theme) {
     }
     #sound { accent-color: ${complementaryColor}; }
     .register-button { background-color: ${complementaryColor}; }
-    #hangman-text:hover { color: ${themeSettings.hoverColor} !important; }
+    #title-text:hover { color: ${themeSettings.hoverColor} !important; }
   `;
 }
 
@@ -102,9 +102,9 @@ document.getElementById('theme').addEventListener('change', function() {
   if (theme) applyTheme(theme);
 });
 
-// Changing starter screen color when 'Hangman!' is clicked
+// Changing starter screen color when 'Brainrot! ... ish!' is clicked
 let isSqueezed = false;
-hangmanText.addEventListener('click', function() {
+titleText.addEventListener('click', function() {
   if (!isSqueezed) {
     navbar.classList.add('squeeze-navbar');
     body.classList.add('squeeze-bg');
@@ -260,6 +260,15 @@ if (usernameValue.length > 20) {
   alert("Username cannot exceed 20 characters");
   return;
 }
+
+let leaderboardBtn = JSON.parse(localStorage.getItem('leaderboard')) || [];
+
+const isDuplicate = leaderboardBtn.some(p => p.username.toLowerCase() === usernameValue.toLowerCase());
+if (isDuplicate) {
+  alert("Username already exists");
+  return;
+}
+
 username.value = '';
 
 //Register Player
@@ -307,7 +316,7 @@ function initLeaderboard() {
       });
       row.style.backgroundColor = themeSettings.hoverColor + '40';
       row.classList.add('selected');
-      selectedPlayer = player.username;
+      selectedPlayer = player;
     });
     leaderboardTable.appendChild(row);
   });
@@ -319,12 +328,16 @@ removePlayerBtn.addEventListener('click', function() {
     return;
   }
   
-  if (confirm(`Are you sure you want to remove ${selectedPlayer}?`)) {
+  if (confirm(`Are you sure you want to remove ${selectedPlayer.username}?`)) {
     let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
-    leaderboard = leaderboard.filter(player => player.username !== selectedPlayer);
+    leaderboard = leaderboard.filter(player => player.username !== selectedPlayer.username);
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-    initLeaderboard();
     selectedPlayer = null;
+    initLeaderboard();
+    document.querySelectorAll('.leaderboard-row').forEach(r => {
+      r.style.backgroundColor = '';
+      r.classList.remove('selected');
+  });
   }
 });
 

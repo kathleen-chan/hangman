@@ -154,7 +154,7 @@ body {
   user-select: none;
 }
 
-#hangman-text {
+#title-text {
   transition: color 0.3s ease;
   cursor: pointer;
 }
