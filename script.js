@@ -324,6 +324,22 @@ function initLeaderboard() {
       <div>${player.score || 0}</div>
     `;
 
+    const charImg = row.querySelector('.leaderboard-character');
+    let currentFrame = 0;
+    const characterImages = Array.isArray(player.characterImage) ? 
+                         player.characterImage : 
+                         [player.characterImage];
+                         charImg.src = characterImages[currentFrame];
+                         if (characterImages.length > 1) {
+                          const animateInterval = setInterval(() => {
+                              currentFrame = (currentFrame + 1) % characterImages.length;
+                              charImg.src = characterImages[currentFrame];
+                          }, 500);
+                          row.addEventListener('DOMNodeRemoved', () => {
+                            clearInterval(animateInterval);
+                        });
+                    }
+
     //Remove Player
     row.addEventListener('click', () => {
       document.querySelectorAll('.leaderboard-row').forEach(r => {
