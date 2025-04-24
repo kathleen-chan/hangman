@@ -65,16 +65,16 @@ function startGame() {
     const feedback = document.getElementById("feedback");
     const checkBtn = document.getElementById("checkBtn");
     const question = document.getElementById("question");
-    //const timerBox = document.getElementById("timer");
+    const timerBox = document.getElementById("timer");
     
     startBtn.style.display = "none";
     inputBox.style.display = "block";
     checkBtn.style.display = "block";
     scoreBox.style.display = "block";
-    //timerBox.style.display = "block";
+    timerBox.style.display = "block";
 
     let currentAnswer = null;
-    //let timeLeft = 30;
+    let timeLeft = 30;
     checkBtn.onclick = handleCheck;
     let score = 0;
 
@@ -98,13 +98,13 @@ function startGame() {
         showQuestion();
     }
 
-    // const timerInterval = setInterval(() => {
-    //     timeLeft--;
-    //     timerBox.textContent = `Time left: ${timeLeft}`;
-    //     if (timeLeft <= 0) {
-    //         clearInterval(timerInterval);  // stop timer
-    //     }
-    // }, 1000);
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        timerBox.textContent = `Time left: ${timeLeft}`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);  // stop timer
+        }
+    }, 1000);
 
     setTimeout(() => {
         question.textContent = "Game Over!";
@@ -116,6 +116,7 @@ function startGame() {
 
     scoreBox.textContent = "Score: 0";
     question.textContent = "Get ready!";
+    timerBox.textContent = "Time left: 30";
     
     showQuestion();
 }
