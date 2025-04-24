@@ -74,15 +74,8 @@ function startGame() {
     timerBox.style.display = "block";
 
     let currentAnswer = null;
-    let timeLeft = 30;
-    checkBtn.onclick = handleCheck;
+    let timeLeft = 10;
     let score = 0;
-
-    inputBox.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            handleCheck();
-        }
-    });
 
     function showQuestion() {
         const { n1, n2, ans, op } = generateFunction();
@@ -103,6 +96,12 @@ function startGame() {
         showQuestion();
     }
 
+    function handleKeyPress(event) {
+        if (event.key === "Enter") handleCheck();
+    }
+
+    inputBox.addEventListener("keypress", handleKeyPress);
+
     timerInterval = setInterval(() => {
         timeLeft--;
         timerBox.textContent = `Time left: ${timeLeft}`;
@@ -112,16 +111,23 @@ function startGame() {
     }, 1000);
 
     setTimeout(() => {
+        feedback.textContent = "";
+        inputBox.value = "";
+        inputBox.removeEventListener("keypress", handleKeyPress);
+
         question.textContent = "Game Over!";
         inputBox.style.display = "none";
         checkBtn.style.display = "none";
         scoreBox.style.display = "none";
-        feedback.textContent = `⏰ Time's up! Final score: ${score}`;
-    }, 30000);
+        feedback.textContent = `⏰ Time's up! Final score: ${score} \n`;
+        startBtn.style.display = "block";
+    }, timeLeft*1000);
+
+    checkBtn.onclick = handleCheck;
 
     scoreBox.textContent = "Score: 0";
     question.textContent = "Get ready!";
-    timerBox.textContent = "Time left: 30";
+    timerBox.textContent = `Time left: ${timeLeft}`;
     
     showQuestion();
 }
