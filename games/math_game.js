@@ -96,11 +96,11 @@ function startGame() {
         showQuestion();
     }
 
-    inputBox.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            handleCheck();
-        }
-    });
+    function handleKeyPress(event) {
+        if (event.key === "Enter") handleCheck();
+    }
+
+    inputBox.addEventListener("keypress", handleKeyPress);
 
     timerInterval = setInterval(() => {
         timeLeft--;
@@ -113,6 +113,7 @@ function startGame() {
     setTimeout(() => {
         feedback.textContent = "";
         inputBox.value = "";
+        inputBox.removeEventListener("keypress", handleKeyPress);
 
         question.textContent = "Game Over!";
         inputBox.style.display = "none";
