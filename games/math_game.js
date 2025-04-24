@@ -72,6 +72,7 @@ function startGame() {
     checkBtn.style.display = "block";
     scoreBox.style.display = "block";
     timerBox.style.display = "block";
+    feedback.textContent = "";
 
     let currentAnswer = null;
     let timeLeft = 10;
@@ -111,7 +112,6 @@ function startGame() {
     }, 1000);
 
     setTimeout(() => {
-        feedback.textContent = "";
         inputBox.value = "";
         inputBox.removeEventListener("keypress", handleKeyPress);
 
