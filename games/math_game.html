@@ -6,29 +6,28 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Math Game</title>
 
-        <!-- PyScript CSS -->
-        <link rel="stylesheet" href="https://pyscript.net/releases/2025.3.1/core.css">
-        <!-- This script tag bootstraps PyScript -->
-        <script type="module" src="https://pyscript.net/releases/2025.3.1/core.js"></script>
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Tiny5&display=swap" rel="stylesheet">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="style.css">
-        
-        <!--<script> tag with a source file-->
-        <script type="mpy" src="math_game.py"></script>
+        <link rel="stylesheet" href="../style.css">
     </head>
     <body>
-        <py-script src="math_game.py" id="game">
-            print("Hello, World!")
-            user1 = User()
-            user1.start_game()
-        </py-script>
+        <h1>Math Game!</h1>
+        <p>Welcome to the Math Game! Solve the problems to earn points.</p>
+
+        <div id="timer" style = "display:none"></div>
+        <button id = "startBtn" onclick="startGame()">Start Game!!!</button>
+        <p id = "question"></p>
+        <div id="score" style="display: none;">Score: 0</div>
+
+        <input type="number" id="ansBox" style="display: none;" placeholder="ans" >
+        <button id="checkBtn" style="display: none;" onclick = "handleCheck()">Check</button>
+
+        <div id="feedback"></div>
+
+        <script src="math_game.js"></script>
     </body>
 </html>
