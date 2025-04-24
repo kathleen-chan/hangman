@@ -78,6 +78,11 @@ function startGame() {
     checkBtn.onclick = handleCheck;
     let score = 0;
 
+    inputBox.addEventListener("keypress", function (event) {
+        if (event.key === "Enter") {
+            handleCheck();
+        }
+    });
 
     function showQuestion() {
         const { n1, n2, ans, op } = generateFunction();

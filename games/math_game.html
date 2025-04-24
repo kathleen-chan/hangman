@@ -1,34 +1,37 @@
 <!doctype html>
 <html>
-    <head>
-        <!-- Recommended meta tags -->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <title>Math Game</title>
 
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Tiny5&display=swap" rel="stylesheet">
+<head>
+    <!-- Recommended meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Math Game</title>
 
-        <!-- CSS -->
-        <link rel="stylesheet" href="../style.css">
-    </head>
-    <body>
-        <h1>Math Game!</h1>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Tiny5&display=swap" rel="stylesheet">
 
-        <div id="timer">
-            <p>Welcome to the Math Game! Solve the problems to earn points.</p>
-        </div>
-        <button id = "startBtn" onclick="startGame()">Start Game!!!</button>
-        <p id = "question"></p>
-        <div id="score" style="display: none;">Score: 0</div>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-        <input type="number" id="ansBox" style="display: none;" placeholder="ans" >
-        <button id="checkBtn" style="display: none;" onclick = "handleCheck()">Check</button>
+<body>
+    <h1>Math Game!</h1>
 
-        <div id="feedback"></div>
+    <div id="timer">
+        <p>Welcome to the Math Game! Solve the problems to earn points.</p>
+    </div>
+    <button id="startBtn" onclick="startGame()">Start Game!!!</button>
+    <p id="question"></p>
+    <div id="score" style="display: none;">Score: 0</div>
 
-        <script src="math_game.js"></script>
-    </body>
+    <input type="number" id="ansBox" style="display: none;" placeholder="ans">
+    <button id="checkBtn" style="display: none;" onclick="handleCheck()" onkeypress="handleCheck()">Check</button>
+
+    <div id="feedback"></div>
+
+    <script src="math_game.js"></script>
+</body>
+
 </html>
