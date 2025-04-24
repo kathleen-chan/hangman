@@ -67,6 +67,7 @@ function applyTheme(theme) {
   menu.style.backgroundColor = themeSettings.bgColor;
   settingsPage.style.backgroundColor = themeSettings.bgColor;
   leaderboardPage.style.backgroundColor = themeSettings.bgColor;
+  registerPage.style.backgroundColor = themeSettings.bgColor;
   titleText.style.color = themeSettings.textColor;
 
   let complementaryColor = theme === 'Red' || theme === 'Blue' ? '#ffb752' : '#f85d6d';
@@ -97,14 +98,14 @@ function applyTheme(theme) {
 // Default theme
 applyTheme('Yellow');
 
-document.getElementById('theme').addEventListener('change', function() {
+document.getElementById('theme').addEventListener('change', function () {
   const theme = this.value;
   if (theme) applyTheme(theme);
 });
 
 // Changing starter screen color when 'Brainrot! ... ish!' is clicked
 let isSqueezed = false;
-titleText.addEventListener('click', function() {
+titleText.addEventListener('click', function () {
   if (!isSqueezed) {
     navbar.classList.add('squeeze-navbar');
     body.classList.add('squeeze-bg');
@@ -114,7 +115,7 @@ titleText.addEventListener('click', function() {
   isSqueezed = true;
 });
 
-backBtn.addEventListener('click', function() {
+backBtn.addEventListener('click', function () {
   menu.style.display = 'none';
   navbar.classList.remove('squeeze-navbar');
   body.classList.remove('squeeze-bg');
@@ -123,21 +124,21 @@ backBtn.addEventListener('click', function() {
 });
 
 // Settings
-settings.addEventListener('click', function() {
+settings.addEventListener('click', function () {
   menu.style.display = 'none';
   settingsPage.style.display = 'flex';
   const themeSelect = document.getElementById('theme');
   themeSelect.selectedIndex = 0;
 });
 
-backSettings.addEventListener('click', function() {
+backSettings.addEventListener('click', function () {
   settingsPage.style.display = 'none';
   menu.style.display = 'flex';
 });
 
 // Sound
 const audioFiles = [
-  { name: "Intro", file: "audio/intro.mp3" }, 
+  { name: "Intro", file: "audio/intro.mp3" },
   { name: "Showdown!", file: "audio/vibes.mp3" }
 ];
 
@@ -200,34 +201,34 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 //Leaderboard
-leaderboardBtn.addEventListener('click', function() {
+leaderboardBtn.addEventListener('click', function () {
   menu.style.display = 'none';
   leaderboardPage.style.display = 'flex';
   initLeaderboard();
 });
 
-backLeaderboard.addEventListener('click', function() {
+backLeaderboard.addEventListener('click', function () {
   username.value = '';
   leaderboardPage.style.display = 'none';
   menu.style.display = 'flex';
 });
 
 //Register
-registerPlayerBtn.addEventListener('click', function() {
+registerPlayerBtn.addEventListener('click', function () {
   leaderboardPage.style.display = 'none';
   registerPage.style.display = 'flex';
 });
 
 let currentChar = 0;
 const charFiles = [
-  { name: "willy", file: "characters/willy.png" }, 
-  { name: "lucy", file: "characters/lucy.png"},
+  { name: "willy", file: "characters/willy.png" },
+  { name: "lucy", file: "characters/lucy.png" },
   { name: "j lei", file: "characters/jlei.png" },
-  { name: "tsai", file: "characters/tsai.png"},
-  { name: "tristan", file: "characters/tristan.png"}
+  { name: "tsai", file: "characters/tsai.png" },
+  { name: "tristan", file: "characters/tristan.png" }
 ];
 
-function loadCharacter(index) {  
+function loadCharacter(index) {
   currentChar = index;
   charDisplay.src = charFiles[index].file;
   charDisplay.alt = charFiles[index].name;
@@ -247,36 +248,36 @@ loadCharacter(0);
 
 const registerForm = document.getElementById('register-form');
 function handleRegistration(e) {
-  if (e) e.preventDefault(); 
-    const usernameValue = username.value.trim();
+  if (e) e.preventDefault();
+  const usernameValue = username.value.trim();
   const playerData = {
     username: usernameValue,
     character: charFiles[currentChar].name,
     characterImage: charFiles[currentChar].file,
     score: 0,
-};
+  };
 
-if (usernameValue.length > 20) { 
-  alert("Username cannot exceed 20 characters");
-  return;
-}
+  if (usernameValue.length > 20) {
+    alert("Username cannot exceed 20 characters");
+    return;
+  }
 
-let leaderboardBtn = JSON.parse(localStorage.getItem('leaderboard')) || [];
+  let leaderboardBtn = JSON.parse(localStorage.getItem('leaderboard')) || [];
 
-const isDuplicate = leaderboardBtn.some(p => p.username.toLowerCase() === usernameValue.toLowerCase());
-if (isDuplicate) {
-  alert("Username already exists");
-  return;
-}
+  const isDuplicate = leaderboardBtn.some(p => p.username.toLowerCase() === usernameValue.toLowerCase());
+  if (isDuplicate) {
+    alert("Username already exists");
+    return;
+  }
 
-username.value = '';
+  username.value = '';
 
-//Register Player
-let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+  //Register Player
+  let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
   leaderboard.push(playerData);
   localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
   localStorage.setItem('currentPlayer', JSON.stringify(playerData));
-  
+
   username.value = '';
   registerPage.style.display = 'none';
   leaderboardPage.style.display = 'flex';
@@ -293,11 +294,11 @@ function initLeaderboard() {
   const leaderboardTable = document.querySelector('.leaderboard-table');
   const currentTheme = document.getElementById('theme').value || 'Yellow';
   const themeSettings = themeConfig[currentTheme];
-  
+
   while (leaderboardTable.children.length > 1) {
     leaderboardTable.removeChild(leaderboardTable.lastChild);
   }
-  
+
   leaderboard.sort((a, b) => b.score - a.score).forEach((player, index) => {
     const row = document.createElement('div');
     row.className = 'leaderboard-row';
@@ -308,7 +309,7 @@ function initLeaderboard() {
       <div>${player.score || 0}</div>
     `;
 
-//Remove Player
+    //Remove Player
     row.addEventListener('click', () => {
       document.querySelectorAll('.leaderboard-row').forEach(r => {
         r.style.backgroundColor = '';
@@ -322,12 +323,12 @@ function initLeaderboard() {
   });
 }
 
-removePlayerBtn.addEventListener('click', function() {
+removePlayerBtn.addEventListener('click', function () {
   if (!selectedPlayer) {
     alert("Please select a player by clicking on their row first");
     return;
   }
-  
+
   if (confirm(`Are you sure you want to remove ${selectedPlayer.username}?`)) {
     let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
     leaderboard = leaderboard.filter(player => player.username !== selectedPlayer.username);
@@ -337,43 +338,43 @@ removePlayerBtn.addEventListener('click', function() {
     document.querySelectorAll('.leaderboard-row').forEach(r => {
       r.style.backgroundColor = '';
       r.classList.remove('selected');
-  });
+    });
   }
 });
 
-backRegister.addEventListener('click', function() {
+backRegister.addEventListener('click', function () {
   username.value = '';
   registerPage.style.display = 'none';
   leaderboardPage.style.display = 'flex';
 });
 
 //Game
-playBtn.addEventListener('click', function() {
+playBtn.addEventListener('click', function () {
   menu.style.display = 'none';
   playPage.style.display = 'flex';
 });
 
-playMathBtn.addEventListener('click', function() {
-window.location.href = 'games/math_game.html';
+playMathBtn.addEventListener('click', function () {
+  window.location.href = 'games/math_game.html';
 });
 
-playClickerBtn.addEventListener('click', function() {
+playClickerBtn.addEventListener('click', function () {
   window.location.href = 'games/clicker.html';
 });
 
-playFillerBtn.addEventListener('click', function() {
+playFillerBtn.addEventListener('click', function () {
   window.location.href = 'games/filler.html';
 });
 
-playTypeBtn.addEventListener('click', function() {
+playTypeBtn.addEventListener('click', function () {
   window.location.href = 'games/type.html';
 });
 
-playHangmanBtn.addEventListener('click', function() {
+playHangmanBtn.addEventListener('click', function () {
   window.location.href = 'games/hangman.html';
 });
 
-backPlay.addEventListener('click', function() {
+backPlay.addEventListener('click', function () {
   playPage.style.display = 'none';
   menu.style.display = 'flex';
 });

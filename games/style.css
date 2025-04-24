@@ -1,11 +1,162 @@
+html {
+  height: 100%;
+}
+
 body {
-    min-height: 100vh;
-    margin: 0;
-    background-color: #FFFFFF;
-    text-align: center;
-    font-family: "Tiny5", sans-serif;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    transition: background-color 1s ease;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #7fa2f5;
+  text-align: center;
+  font-family: "Tiny5", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 2rem;
+  transition: background-color 1s ease;
+}
+
+#timer, #score {
+  font-family: "Tiny5", sans-serif;
+  font-size: 1.2rem;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+  font-weight: 500; 
+}
+
+#question {
+  font-family: 'Saira', sans-serif;
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #FFFFFF;
+  padding: 15px;
+  border-radius: 12px;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.game-container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  transition: all 0.5s ease;
+  width: 90%;
+  max-width: 600px;
+}
+
+.answer-input {
+  font-family: "Bytesized", sans-serif;
+  font-size: 2rem;
+  padding: 15px 20px;
+  margin: 20px 0;
+  width: 200px;
+  text-align: center;
+  border: 3px solid #411805;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #411805;
+  transition: all 0.3s ease;
+}
+
+.answer-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 183, 82, 0.8);
+  border-color: #ffb752;
+}
+
+.game-btn, .check-btn {
+  font-family: "Bytesized", sans-serif;
+  font-size: 1.5rem;
+  background-color: #ffb752;
+  color: #FFFFFF;
+  padding: 12px 25px;
+  border: 2px solid #FFFFFF;
+  border-radius: 12px;
+  cursor: pointer;
+  margin: 20px auto;
+  width: fit-content;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  text-align: center;
+  user-select: none;
+}
+
+.game-btn:hover, .check-btn:hover {
+  transform: scale(1.05);
+  background-color: #ffb752;
+  color: white;
+}
+
+.game-btn:active, .check-btn:active {
+  transform: scale(1);
+}
+
+.ans-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 15px; 
+  background-color: rgba(255, 255, 255, 0.8); 
+  border-radius: 20px;
+  border: 2px solid #411805;  
+  max-width: 400px; 
+  margin: 20px auto; 
+  transition: all 0.3s ease; 
+}
+
+.problem-display {
+  font-size: 3rem;
+  margin: 30px 0;
+  color: #411805;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 15px 30px;
+  border-radius: 12px;
+}
+
+.score-display {
+  font-size: 1.8rem;
+  margin: 15px 0;
+}
+
+.feedback-message {
+  min-height: 30px;
+  font-size: 1.5rem;
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.correct {
+  color: #a1fcac;
+}
+
+.incorrect {
+  color: #f85d6d;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 1.5rem;
   }
+  
+  .answer-input {
+    font-size: 1.5rem;
+    padding: 12px 15px;
+    width: 160px;
+  }
+  
+  .problem-display {
+    font-size: 2rem;
+    padding: 10px 20px;
+  }
+  
+  .checkBtn {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+  }
+}
