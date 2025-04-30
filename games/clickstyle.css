@@ -1,0 +1,28 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f5d27f;
+  text-align: center;
+  font-family: "Tiny5", sans-serif;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  font-size: 2rem;
+  transition: background-color 1s ease;
+}
+
+#points, #flavor{
+  font-family: "Tiny5", sans-serif;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+  margin-bottom: 30px;
+  font-weight: 500; 
+}
+
