@@ -160,3 +160,31 @@ body {
     padding: 10px 20px;
   }
 }
+
+html {
+  height: 100%;
+}
+
+#container {
+  display: flex;
+  height: 100px;
+}
+
+#spnLeft, #spnRight {
+  flex: 1;
+  height: 100%;
+  text-align: center;
+  line-height: 100px;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: flex 0.3s ease;
+}
+
+#spnLeft {
+  background-color: blue;
+}
+
+#spnRight {
+  background-color: red;
+}
