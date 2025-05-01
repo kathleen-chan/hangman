@@ -86,12 +86,12 @@ function applyTheme(theme) {
     .leaderboard-back:hover,
     .register-back:hover,
     .game-option:hover,
-    .arrow:hover {
+    .arrow:hover{
       color: ${complementaryColor};
     }
     #sound { accent-color: ${complementaryColor}; }
     .register-button { background-color: ${complementaryColor}; }
-    #title-text:hover { color: ${themeSettings.hoverColor} !important; }
+    #title-text:hover, .game-tab.active { color: ${themeSettings.hoverColor} !important; }
   `;
 }
 
@@ -204,7 +204,15 @@ window.addEventListener('DOMContentLoaded', () => {
 leaderboardBtn.addEventListener('click', function () {
   menu.style.display = 'none';
   leaderboardPage.style.display = 'flex';
-  initLeaderboard();
+  initLeaderboard('default');
+});
+
+document.querySelectorAll('.game-tab').forEach(tab => {
+  tab.addEventListener('click', function () {
+    document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+    this.classList.add('active');
+    initLeaderboard(this.dataset.game);
+  });
 });
 
 backLeaderboard.addEventListener('click', function () {
@@ -270,6 +278,11 @@ function handleRegistration(e) {
     character: charFiles[currentChar].name,
     characterImage: charFiles[currentChar].file,
     score: 0,
+    scores: {
+      default: function () { return this.math + this.clicker; },
+      math: 0,
+      clicker: 0
+    }
   };
 
   if (usernameValue.length > 20) {
@@ -285,8 +298,6 @@ function handleRegistration(e) {
     return;
   }
 
-  username.value = '';
-
   //Register Player
   let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
   leaderboard.push(playerData);
@@ -297,6 +308,9 @@ function handleRegistration(e) {
   registerPage.style.display = 'none';
   leaderboardPage.style.display = 'flex';
   initLeaderboard();
+
+  const activeTab = document.querySelector('.game-tab.active');
+  initLeaderboard(activeTab? activeTab.dataset.game: 'default');
 }
 
 registerForm.addEventListener('submit', handleRegistration);
@@ -304,7 +318,7 @@ confirmRegister.addEventListener('click', handleRegistration);
 
 let selectedPlayer = null;
 
-function initLeaderboard() {
+function initLeaderboard(gameKey) {
   const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
   const leaderboardTable = document.querySelector('.leaderboard-table');
   const currentTheme = document.getElementById('theme').value || 'Yellow';
@@ -314,31 +328,50 @@ function initLeaderboard() {
     leaderboardTable.removeChild(leaderboardTable.lastChild);
   }
 
-  leaderboard.sort((a, b) => b.score - a.score).forEach((player, index) => {
+
+
+  const gamePlayers = leaderboard.map(player => {
+    if (!player.scores) {
+      player.scores = {
+        default: player.score || 0,
+        math: 0,
+        clicker: 0
+      };
+    }
+
+    return {
+      ...player,
+      displayScore: gameKey === 'default' ?
+        player.scores.default :
+        player.scores[gameKey] || 0
+    };
+  }).sort((a, b) => b.displayScore - a.displayScore);;
+
+  gamePlayers.forEach((player, index) => {
     const row = document.createElement('div');
     row.className = 'leaderboard-row';
     row.innerHTML = `
       <div>${index + 1}</div>
-      <div><img class="leaderboard-character" src="${player.characterImage}" alt="${player.character}"></div>
+      <div><img class="leaderboard-character" src="${player.characterImage[0]}" alt="${player.character}"></div>
       <div>${player.username}</div>
       <div>${player.score || 0}</div>
     `;
 
     const charImg = row.querySelector('.leaderboard-character');
     let currentFrame = 0;
-    const characterImages = Array.isArray(player.characterImage) ? 
-                         player.characterImage : 
-                         [player.characterImage];
-                         charImg.src = characterImages[currentFrame];
-                         if (characterImages.length > 1) {
-                          const animateInterval = setInterval(() => {
-                              currentFrame = (currentFrame + 1) % characterImages.length;
-                              charImg.src = characterImages[currentFrame];
-                          }, 500);
-                          row.addEventListener('DOMNodeRemoved', () => {
-                            clearInterval(animateInterval);
-                        });
-                    }
+    const characterImages = Array.isArray(player.characterImage) ?
+      player.characterImage :
+      [player.characterImage];
+    charImg.src = characterImages[currentFrame];
+    if (characterImages.length > 1) {
+      const animateInterval = setInterval(() => {
+        currentFrame = (currentFrame + 1) % characterImages.length;
+        charImg.src = characterImages[currentFrame];
+      }, 500);
+      row.addEventListener('DOMNodeRemoved', () => {
+        clearInterval(animateInterval);
+      });
+    }
 
     //Remove Player
     row.addEventListener('click', () => {

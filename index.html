@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +16,12 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
-  
+
 </head>
+
 <body id="body">
   <nav class="navbar"></nav>
-  
+
   <div class="game-container">
     <h1 class="tiny5-regular" id="title-text">BRAINROT! ... ish</h1>
   </div>
@@ -43,10 +45,10 @@
     <div class="settings-option">
       <div class="sound-switch">
         <span class="arrow" id="sound-prev"><</span>
-        <span class="sound-label">Sound</span>
-        <span class="arrow" id="sound-next">></span>
+            <span class="sound-label">Sound</span>
+            <span class="arrow" id="sound-next">></span>
       </div>
-      
+
       <input type="range" id="sound" name="sound" min="0" max="100" value="50">
       <label for="theme">Theme</label>
       <select id="theme" name="theme">
@@ -61,85 +63,95 @@
   </div>
 
   <!-- Sound -->
-   <audio id="bg-music" preload="auto" loop>
+  <audio id="bg-music" preload="auto" loop>
     <source src="audio/intro.mp3" type="audio/mpeg">
     <source src="audio/vibes.mp3" type="audio/mpeg">
-   </audio>
+  </audio>
 
-   <!-- Leaderboard -->
-    <div id="leaderboard-page" class="leaderboard">
-      <div class="leaderboard-header">Leaderboard</div>
-      <div class="leaderboard-content">
-        <div class="leaderboard-table">
-          <div class="leaderboard-row header">
-            <div>Rank</div>
-            <div>Character</div>
-            <div>Player</div>
-            <div>Score</div>
-          </div>
-        </div>
-        <div class="leaderboard-btns">
-          <div class="register-player-button" id="register-btn">Register Player</div>
-          <div class="remove-player-button" id="remove-btn">Remove Player</div>
-        </div>
-        <div class="leaderboard-back" id="back-leaderboard">Back</div>
-      </div>
+  <!-- Leaderboard -->
+  <div id="leaderboard-page" class="leaderboard">
+    <div class="leaderboard-header">Leaderboard</div>
+    <div class="game-tabs">
+      <div class="game-tab active" data-game="default">Total</div>
+      <div class="game-tab" data-game="math">Math Game</div>
+      <div class="game-tab" data-game="clicker">Clicker Game</div>
     </div>
+    <div class="leaderboard-content">
+      <div class="leaderboard-table">
+        <div class="leaderboard-row header">
+          <div>Rank</div>
+          <div>Character</div>
+          <div>Player</div>
+          <div>Score</div>
+        </div>
+      </div>
+      <div class="leaderboard-btns">
+        <div class="register-player-button" id="register-btn">Register Player</div>
+        <div class="remove-player-button" id="remove-btn">Remove Player</div>
+      </div>
+      <div class="leaderboard-back" id="back-leaderboard">Back</div>
+    </div>
+  </div>
 
   <!-- Register -->
-    <div id="register-page">
-      <div class="register-header">Register</div>
-      <div class="register-content">
-        <form id="register-form">
-          <div class="register-switch">
-            <span class="arrow" id="register-prev"><</span>
-            <div class="character-container">
-              <img id="character-display" src="" alt="Selected Character">
-            </div>
-            <span class="arrow" id="register-next">></span>
-          </div>
-          <div class="username-input">
-            <input type="text" id="username" placeholder="username">
-          </div>
-          <button type="submit" id="confirm-register" class="register-button">Confirm</button>
-          <div class="leaderboard-back" id="back-register">Back</div>
+  <div id="register-page">
+    <div class="register-header">Register</div>
+    <div class="register-content">
+      <form id="register-form">
+        <div class="register-switch">
+          <span class="arrow" id="register-prev"><</span>
+              <div class="character-container">
+                <img id="character-display" src="" alt="Selected Character">
+              </div>
+              <span class="arrow" id="register-next">></span>
         </div>
-      </form>
+        <div class="username-input">
+          <input type="text" id="username" placeholder="username">
+        </div>
+        <button type="submit" id="confirm-register" class="register-button">Confirm</button>
+        <div class="leaderboard-back" id="back-register">Back</div>
     </div>
-    
+    </form>
+  </div>
+
   <!-- Play -->
   <div id="play-page">
     <div class="play-header">Choose a Game!</div>
     <div class="game-options-container">
-    <div class="game-options">
-      <a href="games/math_game.html" class="game-option" id="play-math">
-      <img src="games/math-game-icon.png" alt="Math Game">
-      <span>Math</span>
-      </a>
-      <a href="games/clicker.html" class="game-option" id="play-clicker">
-        <img src="games/clicker-icon.png" alt="Clicker Game">
-        <span>Clicker</span>
-      </a>
-      <a href="games/filler.html" class="game-option" id="play-filler">
-        <img src="games/filler-icon.png" alt="Filler Game">
-        <span>Filler</span>
-      </a>
-      <a href="games/type.html" class="game-option" id="play-type">
-        <img src="games/type-icon.png" alt="Type Racer">
-        <span>Type Racer</span>
-      </a>
-      <a href="games/hangman.html" class="game-option" id="play-hangman">
-        <img src="games/hangman-icon.png" alt="Hangman">
-        <span>Hangman</span>
-      </a>
+      <div class="game-options">
+        <a href="games/math_game.html" class="game-option" id="play-math">
+          <img src="games/math-game-icon.png" alt="Math Game">
+          <span>Math</span>
+        </a>
+        <a href="games/clicker.html" class="game-option" id="play-clicker">
+          <img src="games/clicker-icon.png" alt="Clicker Game">
+          <span>Clicker</span>
+        </a>
+        <a href="games/filler.html" class="game-option" id="play-filler">
+          <img src="games/filler-icon.png" alt="Filler Game">
+          <span>Filler</span>
+        </a>
+        <a href="games/type.html" class="game-option" id="play-type">
+          <img src="games/type-icon.png" alt="Type Racer">
+          <span>Type Racer</span>
+        </a>
+        <a href="games/hangman.html" class="game-option" id="play-hangman">
+          <img src="games/hangman-icon.png" alt="Hangman">
+          <span>Hangman</span>
+        </a>
+        <a href="games/multiClicker.html" class="game-option" id="play-multi">
+          <img src="games/multi-icon.png" alt="Multi Clicker">
+          <span>Multi Clicker</span>
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="settings-back" id="back-play">Back</div>
+    <div class="settings-back" id="back-play">Back</div>
   </div>
 
- 
+
   <!-- JavaScript -->
   <script src="script.js"></script>
-  
+
 </body>
+
 </html>

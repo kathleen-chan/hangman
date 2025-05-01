@@ -177,6 +177,33 @@ body {
   transition: all 1s ease;
 }
 
+.game-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  gap: 5px;
+}
+
+.game-tab {
+  padding: 8px 15px;
+  background-color: #f3efec;
+  color: #411805;
+  border: 2px solid #411805;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.game-tab:hover {
+  background-color: #ffe8c6;
+  color: #411805;
+}
+
+.game-tab.active {
+  color: #FFFFFF;
+}
+
 .leaderboard-btns {
   display: flex;
   justify-content: center;
