@@ -221,17 +221,32 @@ registerPlayerBtn.addEventListener('click', function () {
 
 let currentChar = 0;
 const charFiles = [
-  { name: "willy", file: "characters/willy.png" },
-  { name: "lucy", file: "characters/lucy.png" },
-  { name: "j lei", file: "characters/jlei.png" },
-  { name: "tsai", file: "characters/tsai.png" },
-  { name: "tristan", file: "characters/tristan.png" }
+  { name: "willy", file: ["characters/will1.png", "characters/will2.png"] },
+  { name: "lucy", file: ["characters/lucy1.png", "characters/lucy2.png"] },
+  { name: "j lei", file: ["characters/jlei1.png", "characters/jlei2.png"] },
+  { name: "tsai", file: ["characters/tsai1.png", "characters/tsai2.png"] },
+  { name: "tristan", file: ["characters/tristan1.png", "characters/tristan2.png"] }
 ];
+
+let animationInterval;
+let currentFrame = 0;
 
 function loadCharacter(index) {
   currentChar = index;
-  charDisplay.src = charFiles[index].file;
-  charDisplay.alt = charFiles[index].name;
+  if (animationInterval) {
+    clearInterval(animationInterval);
+  }
+  animateCharacter();
+}
+
+function animateCharacter() {
+  currentFrame = 0;
+  charDisplay.src = charFiles[currentChar].file[currentFrame];
+  charDisplay.alt = charFiles[currentChar].name;
+  animationInterval = setInterval(() => {
+    currentFrame = (currentFrame + 1) % 2;
+    charDisplay.src = charFiles[currentChar].file[currentFrame];
+  }, 500);
 }
 
 registerPrev.addEventListener('click', () => {
@@ -308,6 +323,22 @@ function initLeaderboard() {
       <div>${player.username}</div>
       <div>${player.score || 0}</div>
     `;
+
+    const charImg = row.querySelector('.leaderboard-character');
+    let currentFrame = 0;
+    const characterImages = Array.isArray(player.characterImage) ? 
+                         player.characterImage : 
+                         [player.characterImage];
+                         charImg.src = characterImages[currentFrame];
+                         if (characterImages.length > 1) {
+                          const animateInterval = setInterval(() => {
+                              currentFrame = (currentFrame + 1) % characterImages.length;
+                              charImg.src = characterImages[currentFrame];
+                          }, 500);
+                          row.addEventListener('DOMNodeRemoved', () => {
+                            clearInterval(animateInterval);
+                        });
+                    }
 
     //Remove Player
     row.addEventListener('click', () => {
